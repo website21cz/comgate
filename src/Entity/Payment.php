@@ -39,7 +39,10 @@ class Payment extends AbstractPayment
 		string $fullName,
 		string $method = PaymentMethodCode::ALL,
 		string $country = CountryCode::ALL,
-		string $lang = LangCode::CS
+		string $lang = LangCode::CS,
+		string $url_paid,
+		string $url_cancelled,
+		string $url_pending
 	): self
 	{
 		$p = new static();
@@ -52,6 +55,9 @@ class Payment extends AbstractPayment
 		$p->method = $method;
 		$p->country = $country;
 		$p->lang = $lang;
+		$p->url_paid=$url_paid,
+		$p->url_cancelled=$url_cancelled,
+		$p->url_pending=$url_pending
 
 		return $p;
 	}
@@ -134,6 +140,9 @@ class Payment extends AbstractPayment
 			'initRecurring' => $this->initRecurring ? 'true' : 'false',
 			'verification' => $this->verification ? 'true' : 'false',
 			'embedded' => $this->embedded ? 'true' : 'false',
+			'url_paid'=>$this->url_paid?$this->url_paid:null,
+			'url_cancelled'=>$this->url_cancelled?$this->url_cancelled:null,
+			'url_pending'=>$this->url_pending?$this->url_pending:null
 		]);
 	}
 
